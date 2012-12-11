@@ -1,0 +1,11 @@
+.DS_Store
+*~
+/dev_bundle
+/dev_bundle*.tar.gz
+/dist
+\#*\#
+.\#*
+.idea
+*.iml
+*.sublime-project
+*.sublime-workspace
