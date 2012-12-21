@@ -10,10 +10,12 @@
             (define-key js2-mode-map [mouse-1] nil)
             ))
 
-(add-hook 'js-mode-hook
+(add-hook 'js2-mode-hook
 	  (lambda ()
 	    (setq show-trailing-whitespace t
                  js-indent-level 2)))
+
+(add-hook 'js2-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 (setq js-indent-level 2)
 ;spaces, not literal tabs
@@ -34,6 +36,8 @@
  ;; If there is more than one, they won't work right.
  '(iswitchb-mode t)
  '(js2-basic-offset 2)
+ '(js2-global-externs (quote ("Meteor" "_" "Accounts" "Tinytest" "console" "process" "LocalCollection" "Spark")))
+ '(js2-include-browser-externs nil)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
