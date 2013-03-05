@@ -29,6 +29,28 @@
 
 (global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
+(defun create-tags-js (dir-name)
+     "Create tags file."
+     (interactive "DDirectory: ")
+     (eshell-command
+      (format "find %s -type f -name \"*.js\" -not -path \"*/.*/*\"| etags -" dir-name)))
+
+
+;;smerge-mode
+(eval-after-load "smerge-mode"
+  '(progn
+     (setq smerge-base-re "^|||||||.*\n")))
+
+(defun sm-try-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode 1))))
+(add-hook 'find-file-hook 'sm-try-smerge t)
+
+
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,7 +58,7 @@
  ;; If there is more than one, they won't work right.
  '(iswitchb-mode t)
  '(js2-basic-offset 2)
- '(js2-global-externs (quote ("Meteor" "_" "Accounts" "Tinytest" "console" "process" "LocalCollection" "Spark")))
+ '(js2-global-externs (quote ("Meteor" "_" "Accounts" "Tinytest" "console" "process" "LocalCollection" "Spark" "EJSON")))
  '(js2-include-browser-externs nil)
  '(tool-bar-mode nil))
 (custom-set-faces
