@@ -1,6 +1,8 @@
 export EDITOR=emacs
 
 export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/found_software/arcanist/bin:/opt/local/bin:/opt/local/sbin
+export PATH=/usr/local/Cellar/git/1.8.4.3/bin:$PATH
+
 
 export OLDPATH=$PATH
 
