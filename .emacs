@@ -66,7 +66,7 @@
 
 (show-paren-mode 1)
 
-(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
+(global-set-key (kbd "M-RET") 'toggle-frame-fullscreen)
 
 (defun create-tags-js (dir-name)
      "Create tags file."
