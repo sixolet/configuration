@@ -8,6 +8,12 @@ fi
 
 export OLDPATH=$PATH
 
+export PATH="$OLDPATH:$HOME/gopath/bin"
+
+export OLDGOPATH=$GOPATH
+export GOPATH="$HOME/gopath:$OLDGOPATH"
+
+
 . ~/configuration/git-prompt.sh
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM="git verbose"
