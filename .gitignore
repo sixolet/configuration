@@ -9,3 +9,4 @@
 *.iml
 *.sublime-project
 *.sublime-workspace
+elisp/go-mode/go-mode-load.el
