@@ -1,9 +1,13 @@
 (add-to-list 'load-path "~/configuration/elisp")
 (add-to-list 'load-path "~/configuration/elisp/coffee-mode")
 (add-to-list 'load-path "~/configuration/elisp/go-mode")
+(add-to-list 'load-path "~/configuration/elisp/company-mode")
+(add-to-list 'load-path "~/configuration/gocode/emacs-company")
 
 (add-to-list 'exec-path "/usr/local/bin")
 (add-to-list 'exec-path "~/gopath/bin")
+
+(setenv "GOPATH" "~/gopath")
 
 ;; Pulled from http://paralambda.org/2012/07/02/using-gnu-emacs-as-a-terminal-emulator/
 (when (require 'multi-term nil t)
@@ -46,6 +50,8 @@
 (require 'go-mode-load)
 (defun my-go-mode-hook ()
   (setq-local tab-width 4)
+  (setq-local company-backends '(company-go))
+  (company-mode)
   (if
       ;; the go-server repository uses a nonstandard gofmt -- four-space indent
       (string-match-p "go-server" (buffer-file-name))
@@ -55,6 +61,9 @@
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 (add-hook 'before-save-hook #'gofmt-before-save)
+
+(require 'company)
+(require 'company-go)
 
 ;; coffeescript mode setup
 
