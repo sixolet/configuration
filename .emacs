@@ -1,4 +1,6 @@
 (add-to-list 'load-path "~/configuration/elisp")
+(add-to-list 'load-path "~/configuration/elisp/coffee-mode")
+(add-to-list 'load-path "~/configuration/elisp/go-mode")
 
 ;; Pulled from http://paralambda.org/2012/07/02/using-gnu-emacs-as-a-terminal-emulator/
 (when (require 'multi-term nil t)
@@ -25,6 +27,8 @@
               (cons "M-y" 'term-send-raw-meta)
               (cons "C-y" 'term-send-raw))))
 
+(setq-default indent-tabs-mode nil)
+
 ;; The following is my own or pulled from random places.
 (add-hook 'term-mode-hook (lambda ()
   (setq show-trailing-whitespace nil)))
@@ -34,9 +38,22 @@
            (lambda ()
              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
+;; go mode setup
+
+(require 'go-mode-load)
+(defun my-go-mode-hook ()
+  (setq tab-width 4 indent-tabs-mode nil))
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
+;; coffeescript mode setup
+
+(require 'coffee-mode)
+(custom-set-variables '(coffee-tab-width 2))
+
 ;; python mode setup
 
 (add-hook 'python-mode-hook (lambda ()
+  (setq indent-tabs-mode nil)
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 ;; js2-mode setup
 (autoload 'js2-mode "js2-mode" nil t)

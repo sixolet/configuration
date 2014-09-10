@@ -1,0 +1,6 @@
+[submodule "elisp/coffee-mode"]
+	path = elisp/coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git
+[submodule "elisp/go-mode"]
+	path = elisp/go-mode
+	url = https://github.com/dominikh/go-mode.el.git
