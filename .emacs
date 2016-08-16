@@ -1,8 +1,9 @@
 (add-to-list 'load-path "~/configuration/elisp")
 (add-to-list 'load-path "~/configuration/elisp/coffee-mode")
-(add-to-list 'load-path "~/configuration/elisp/go-mode")
-(add-to-list 'load-path "~/configuration/elisp/company-mode")
-(add-to-list 'load-path "~/configuration/gocode/emacs-company")
+(when (>= emacs-major-version 24) 
+      (add-to-list 'load-path "~/configuration/elisp/go-mode")
+      (add-to-list 'load-path "~/configuration/elisp/company-mode")
+      (add-to-list 'load-path "~/configuration/gocode/emacs-company"))
 
 (add-to-list 'exec-path "/usr/local/bin")
 (add-to-list 'exec-path "~/gopath/bin")
@@ -46,29 +47,30 @@
              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
 
 ;; go mode setup
+(when (>= emacs-major-version 24)
+  (require 'go-mode-load)
+  (defun my-go-mode-hook ()
+    (setq-local tab-width 4)
+    (setq-local company-backends '(company-go))
+    (company-mode)
+    (if
+        ;; the go-server repository uses a nonstandard gofmt -- four-space indent
+        (string-match-p "go-server" (buffer-file-name))
+        (progn
+          (setq-local indent-tabs-mode nil)
+          (setq-local gofmt-command "~/configuration/gofmt-spaces.sh"))))
+  
+  (add-hook 'go-mode-hook 'my-go-mode-hook)
+  (add-hook 'before-save-hook #'gofmt-before-save)
 
-(require 'go-mode-load)
-(defun my-go-mode-hook ()
-  (setq-local tab-width 4)
-  (setq-local company-backends '(company-go))
-  (company-mode)
-  (if
-      ;; the go-server repository uses a nonstandard gofmt -- four-space indent
-      (string-match-p "go-server" (buffer-file-name))
-      (progn
-        (setq-local indent-tabs-mode nil)
-        (setq-local gofmt-command "~/configuration/gofmt-spaces.sh"))))
-
-(add-hook 'go-mode-hook 'my-go-mode-hook)
-(add-hook 'before-save-hook #'gofmt-before-save)
-
-(require 'company)
-(require 'company-go)
+  (require 'company)
+  (require 'company-go)
+)
 
 ;; coffeescript mode setup
-
-(require 'coffee-mode)
-(custom-set-variables '(coffee-tab-width 2))
+(when (>= emacs-major-version 24)
+  (require 'coffee-mode)
+  (custom-set-variables '(coffee-tab-width 2)))
 
 ;; python mode setup
 
