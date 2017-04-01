@@ -1,6 +1,6 @@
 (add-to-list 'load-path "~/configuration/elisp")
 (add-to-list 'load-path "~/configuration/elisp/coffee-mode")
-(when (>= emacs-major-version 24) 
+(when (>= emacs-major-version 24)
       (add-to-list 'load-path "~/configuration/elisp/go-mode")
       (add-to-list 'load-path "~/configuration/elisp/company-mode")
       (add-to-list 'load-path "~/configuration/gocode/emacs-company"))
@@ -10,13 +10,10 @@
 
 (setenv "GOPATH" "~/gopath")
 
+(require 'ido)
+(ido-mode t)
+
 ;; Pulled from http://paralambda.org/2012/07/02/using-gnu-emacs-as-a-terminal-emulator/
-(when (require 'multi-term nil t)
-  (global-set-key (kbd "<f5>") 'multi-term)
-  (global-set-key (kbd "<C-next>") 'multi-term-next)
-  (global-set-key (kbd "<C-prior>") 'multi-term-prev)
-  (setq multi-term-buffer-name "term"
-        multi-term-program "/bin/bash"))
 (when (require 'term nil t) ; only if term can be loaded..
   (setq term-bind-key-alist
         (list (cons "C-c C-c" 'term-interrupt-subjob)
@@ -60,7 +57,7 @@
         (progn
           (setq-local indent-tabs-mode nil)
           (setq-local gofmt-command "~/configuration/gofmt-spaces.sh"))))
-  
+
   (add-hook 'go-mode-hook 'my-go-mode-hook)
   (add-hook 'before-save-hook #'gofmt-before-save)
 
