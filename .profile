@@ -15,6 +15,8 @@ export GOPATH="$HOME/gopath:$OLDGOPATH"
 
 
 . ~/configuration/git-prompt.sh
+. ~/configuration/git_completion.bash
+
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM="git verbose"
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -25,3 +27,5 @@ function fgrepw { find . -name '*.js' -o -name '*.html' -o -name '*.css' -o -nam
 function fgreph { find . -name '*.html'  -not -path '*.meteor*' | xargs grep $1; }
 
 function rmtilde {  find . -name '*~' -type f | xargs rm; }
+function syncmusic { rsync -a --progress --exclude Ableton ~/Music/ /Volumes/Musicshare/Naomi ;
+}

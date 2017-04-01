@@ -38,6 +38,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; The following is my own or pulled from random places.
+(require 'php-mode)
 (add-hook 'term-mode-hook (lambda ()
   (setq show-trailing-whitespace nil)))
 
